@@ -35,9 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const SCHOOL_NAME = "Mergington High School";
-  const TWITTER_SHARE_URL = "https://twitter.com/intent/tweet";
+  const X_SHARE_URL = "https://twitter.com/intent/tweet";
   const FACEBOOK_SHARE_URL = "https://www.facebook.com/sharer/sharer.php";
-  const WHATSAPP_SHARE_URL = "https://wa.me/";
+  const WHATSAPP_SHARE_URL = "https://wa.me/?text=";
 
   // State for activities and filters
   let allActivities = {};
@@ -489,7 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="social-share-buttons">
           <a
             class="share-button share-button-x"
-            href="${TWITTER_SHARE_URL}?text=${encodedText}&url=${encodedUrl}"
+            href="${X_SHARE_URL}?text=${encodedText}&url=${encodedUrl}"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Share ${activityName} on X"
@@ -507,7 +507,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </a>
           <a
             class="share-button share-button-whatsapp"
-            href="${WHATSAPP_SHARE_URL}?text=${encodedText}%20${encodedUrl}"
+            href="${WHATSAPP_SHARE_URL}${encodedText}%20${encodedUrl}"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Share ${activityName} on WhatsApp"
