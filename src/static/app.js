@@ -472,6 +472,48 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function createShareButtons(activityName) {
+    const shareText = `Check out the ${activityName} activity at Mergington High School!`;
+    const shareUrl = `${window.location.origin}${window.location.pathname}`;
+    const encodedText = encodeURIComponent(shareText);
+    const encodedUrl = encodeURIComponent(shareUrl);
+
+    return `
+      <div class="social-share">
+        <span class="share-label">Share:</span>
+        <div class="social-share-buttons">
+          <a
+            class="share-button share-button-x"
+            href="https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share ${activityName} on X"
+          >
+            X
+          </a>
+          <a
+            class="share-button share-button-facebook"
+            href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share ${activityName} on Facebook"
+          >
+            Facebook
+          </a>
+          <a
+            class="share-button share-button-whatsapp"
+            href="https://wa.me/?text=${encodedText}%20${encodedUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share ${activityName} on WhatsApp"
+          >
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    `;
+  }
+
   // Function to render a single activity card
   function renderActivityCard(name, details) {
     const activityCard = document.createElement("div");
@@ -569,6 +611,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         }
       </div>
+      ${createShareButtons(name)}
     `;
 
     // Add click handlers for delete buttons
