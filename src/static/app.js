@@ -314,6 +314,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return details.schedule;
   }
 
+  // Escape HTML special characters before inserting dynamic content into templates
+  function escapeHtml(text) {
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
   // Function to determine activity type (this would ideally come from backend)
   function getActivityType(activityName, description) {
     const name = activityName.toLowerCase();
@@ -518,6 +528,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Format the schedule using the new helper function
     const formattedSchedule = formatSchedule(details);
+    const difficultyHtml = details.difficulty
+      ? `<p><strong>Difficulty:</strong> ${escapeHtml(details.difficulty)}</p>`
+      : "";
 
     // Create activity tag
     const tagHtml = `
@@ -543,11 +556,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ${tagHtml}
       <h4>${name}</h4>
       <p>${details.description}</p>
-      ${
-        details.difficulty
-          ? `<p><strong>Difficulty:</strong> ${details.difficulty}</p>`
-          : ""
-      }
+      ${difficultyHtml}
       <p class="tooltip">
         <strong>Schedule:</strong> ${formattedSchedule}
         <span class="tooltip-text">Regular meetings at this time throughout the semester</span>
