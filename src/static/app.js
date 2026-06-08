@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const userInfo = document.getElementById("user-info");
   const displayName = document.getElementById("display-name");
   const logoutButton = document.getElementById("logout-button");
+  const themeToggleButton = document.getElementById("theme-toggle");
+  const themeToggleLabel = document.getElementById("theme-toggle-label");
+  const themeIcon = document.querySelector("#theme-toggle .theme-icon");
   const loginModal = document.getElementById("login-modal");
   const loginForm = document.getElementById("login-form");
   const closeLoginModal = document.querySelector(".close-login-modal");
@@ -50,6 +53,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Authentication state
   let currentUser = null;
+
+  function applyTheme(theme) {
+    const isDarkMode = theme === "dark";
+    document.body.classList.toggle("dark-mode", isDarkMode);
+    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+
+    if (themeToggleLabel && themeToggleButton) {
+      if (themeIcon) {
+        themeIcon.textContent = isDarkMode ? "☀️" : "🌙";
+      }
+      themeToggleLabel.textContent = isDarkMode ? "Light mode" : "Dark mode";
+      themeToggleButton.setAttribute(
+        "aria-label",
+        isDarkMode ? "Switch to light mode" : "Switch to dark mode"
+      );
+    }
+  }
+
+  function initializeTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    applyTheme(savedTheme === "dark" ? "dark" : "light");
+  }
 
   // Time range mappings for the dropdown
   const timeRanges = {
@@ -956,7 +981,15 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeRangeFilter,
   };
 
+  if (themeToggleButton) {
+    themeToggleButton.addEventListener("click", () => {
+      const isDarkMode = document.body.classList.contains("dark-mode");
+      applyTheme(isDarkMode ? "light" : "dark");
+    });
+  }
+
   // Initialize app
+  initializeTheme();
   checkAuthentication();
   initializeFilters();
   fetchActivities();
