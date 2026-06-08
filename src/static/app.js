@@ -34,6 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
     technology: { label: "Technology", color: "#e8eaf6", textColor: "#3949ab" },
   };
 
+  const SCHOOL_NAME = "Mergington High School";
+  const TWITTER_SHARE_URL = "https://twitter.com/intent/tweet";
+  const FACEBOOK_SHARE_URL = "https://www.facebook.com/sharer/sharer.php";
+  const WHATSAPP_SHARE_URL = "https://wa.me/";
+
   // State for activities and filters
   let allActivities = {};
   let currentFilter = "all";
@@ -473,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function createShareButtons(activityName) {
-    const shareText = `Check out the ${activityName} activity at Mergington High School!`;
+    const shareText = `Check out the ${activityName} activity at ${SCHOOL_NAME}!`;
     const shareUrl = `${window.location.origin}${window.location.pathname}`;
     const encodedText = encodeURIComponent(shareText);
     const encodedUrl = encodeURIComponent(shareUrl);
@@ -484,7 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="social-share-buttons">
           <a
             class="share-button share-button-x"
-            href="https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}"
+            href="${TWITTER_SHARE_URL}?text=${encodedText}&url=${encodedUrl}"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Share ${activityName} on X"
@@ -493,7 +498,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </a>
           <a
             class="share-button share-button-facebook"
-            href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}"
+            href="${FACEBOOK_SHARE_URL}?u=${encodedUrl}"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Share ${activityName} on Facebook"
@@ -502,7 +507,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </a>
           <a
             class="share-button share-button-whatsapp"
-            href="https://wa.me/?text=${encodedText}%20${encodedUrl}"
+            href="${WHATSAPP_SHARE_URL}?text=${encodedText}%20${encodedUrl}"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Share ${activityName} on WhatsApp"
