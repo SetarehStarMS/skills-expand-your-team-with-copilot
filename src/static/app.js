@@ -34,6 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
     technology: { label: "Technology", color: "#e8eaf6", textColor: "#3949ab" },
   };
 
+  const SCHOOL_NAME = "Mergington High School";
+  const X_SHARE_URL = "https://x.com/intent/tweet";
+  const FACEBOOK_SHARE_URL = "https://www.facebook.com/sharer/sharer.php";
+  const WHATSAPP_SHARE_URL = "https://wa.me/?text=";
+
   // State for activities and filters
   let allActivities = {};
   let currentFilter = "all";
@@ -472,6 +477,48 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function createShareButtons(activityName) {
+    const shareText = `Check out the ${activityName} activity at ${SCHOOL_NAME}!`;
+    const shareUrl = `${window.location.origin}${window.location.pathname}`;
+    const encodedText = encodeURIComponent(shareText);
+    const encodedUrl = encodeURIComponent(shareUrl);
+
+    return `
+      <div class="social-share">
+        <span class="share-label">Share:</span>
+        <div class="social-share-buttons">
+          <a
+            class="share-button share-button-x"
+            href="${X_SHARE_URL}?text=${encodedText}&url=${encodedUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share ${activityName} on X"
+          >
+            X
+          </a>
+          <a
+            class="share-button share-button-facebook"
+            href="${FACEBOOK_SHARE_URL}?u=${encodedUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share ${activityName} on Facebook"
+          >
+            Facebook
+          </a>
+          <a
+            class="share-button share-button-whatsapp"
+            href="${WHATSAPP_SHARE_URL}${encodedText}%20${encodedUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share ${activityName} on WhatsApp"
+          >
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    `;
+  }
+
   // Function to render a single activity card
   function renderActivityCard(name, details) {
     const activityCard = document.createElement("div");
@@ -569,6 +616,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         }
       </div>
+      ${createShareButtons(name)}
     `;
 
     // Add click handlers for delete buttons
