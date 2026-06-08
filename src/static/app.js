@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const SCHOOL_NAME = "Mergington High School";
-  const X_SHARE_URL = "https://twitter.com/intent/tweet";
+  const X_SHARE_URL = "https://x.com/intent/tweet";
   const FACEBOOK_SHARE_URL = "https://www.facebook.com/sharer/sharer.php";
   const WHATSAPP_SHARE_URL = "https://wa.me/?text=";
 

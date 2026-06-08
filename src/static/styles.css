@@ -212,7 +212,7 @@ section h3 {
 
 .share-button {
   text-decoration: none;
-  color: #fff;
+  color: var(--primary-text);
   font-size: 0.7rem;
   padding: 4px 8px;
   border-radius: 999px;
